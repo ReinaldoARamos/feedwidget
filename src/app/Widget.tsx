@@ -1,16 +1,16 @@
+"use client";
 import { ChatTeardropDots } from "@phosphor-icons/react/dist/ssr";
-
-
+import { Popover } from "@headlessui/react";
 export function Widget() {
-    return (
-    <div>
-        <p>Hello World</p>
-    <button className="bg-brand-500 rounded-full px-3 h-12 text-gray-50 flex items-center group">   
-     <ChatTeardropDots size={12} className="w-6 h-6 " />
-     <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-linear ">
-        <span className="pl-2">Feedback</span>
-     </span>
-     </button>
-    
-    </div>)
+  return (
+    <Popover className="absolute bottom-5 right-5">
+      <Popover.Panel>Hello World</Popover.Panel>
+      <Popover.Button className="group flex h-12 items-center rounded-full bg-brand-500 px-3 text-gray-50">
+        <ChatTeardropDots size={12} className="h-6 w-6 " />
+        <span className="max-w-0 overflow-hidden transition-all duration-500 ease-linear group-hover:max-w-xs ">
+          <span className="pl-2">Feedback</span>
+        </span>
+      </Popover.Button>
+    </Popover>
+  );
 }
