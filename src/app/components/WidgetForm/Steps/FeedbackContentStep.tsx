@@ -40,6 +40,13 @@ export function FeedbackContentStep({
           >
 
           </textarea>
+          <footer className="flex gap-2 mt-2">
+            <button 
+            className="p-2  bg-brand-500 rounded-md border-transparent flex-1 justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors focus:ring-offset-zinc-900 focus:ring-brand-500"
+            type="submit">
+                    Enviar Feedback
+            </button>
+          </footer>
         </form>
       </div>
     </>
