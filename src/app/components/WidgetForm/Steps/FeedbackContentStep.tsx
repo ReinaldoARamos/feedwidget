@@ -6,9 +6,11 @@ import { CloseButton } from "../../CloseButton";
 interface FeedBackContentSteps {
   feedbacktype: FeedbackType;
   onFeedbackRestartRequested: () => void;
-
 }
-export function FeedbackContentStep({ feedbacktype, onFeedbackRestartRequested }: FeedBackContentSteps) {
+export function FeedbackContentStep({
+  feedbacktype,
+  onFeedbackRestartRequested,
+}: FeedBackContentSteps) {
   const feedbackTypeInfo = FeedbackTypes[feedbacktype];
   return (
     <>
@@ -16,7 +18,7 @@ export function FeedbackContentStep({ feedbacktype, onFeedbackRestartRequested }
         <button
           className="absolute left-5 top-5 text-zinc-400 hover:text-zinc-100"
           type="button"
-         onClick={() => onFeedbackRestartRequested()}
+          onClick={() => onFeedbackRestartRequested()}
         >
           <ArrowLeft className="h-4 w-4" />
         </button>
@@ -30,7 +32,16 @@ export function FeedbackContentStep({ feedbacktype, onFeedbackRestartRequested }
         </span>
         <CloseButton />
       </header>
-      <div className="flex w-full gap-2  py-8">aaaaaaaaaaaaaaaaaaaaaaa</div>
+      <div className="flex w-full gap-2  py-8">
+        <form className="my-4 w-full">
+          <textarea
+            className="min-h-[112px] w-full min-w-[304px] resize-none rounded-md border border-zinc-600 bg-transparent text-sm placeholder-zinc-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none"
+            placeholder="Conte com detalhes oque está acontecendo..."
+          >
+
+          </textarea>
+        </form>
+      </div>
     </>
   );
 }
