@@ -39,7 +39,12 @@ export function WidgetForm() {
         {Object.entries(FeedbackTypes).map(([key, value]) => {
           console.log(key, value);
           return (
-            <button key={value.title}>
+            <button
+              key={value.title}
+              className="transistion flex w-24 flex-1 flex-col items-center gap-2 rounded-lg border-2 border-transparent bg-zinc-800 py-5 focus:outline-none duration-200 hover:border-brand-500 focus:border-brand-500"
+              type="button"
+              //  onClick={}
+            >
               <img src={value.image.source} alt={value.image.alt} />
               <span>{value.title}</span>
             </button>
