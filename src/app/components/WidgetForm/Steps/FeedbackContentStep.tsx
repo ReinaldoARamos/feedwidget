@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { FeedbackType, FeedbackTypes } from "..";
 import { CloseButton } from "../../CloseButton";
 import { Camera } from "lucide-react";
+import { ScreenShotButton } from "./ScreenShotButton";
 
 interface FeedBackContentSteps {
   feedbacktype: FeedbackType;
@@ -40,9 +41,7 @@ export function FeedbackContentStep({
             placeholder="Conte com detalhes oque está acontecendo..." 
           ></textarea>
           <footer className="mt-2 flex gap-2">
-            <button type="button" className="p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-700 transition-colors  focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900">
-              <Camera className="h-6 w-6" />
-            </button>
+            <ScreenShotButton />
             <button
               className="flex-1  items-center justify-center rounded-md border-transparent bg-brand-500 p-2 text-sm transition-colors hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
               type="submit"
