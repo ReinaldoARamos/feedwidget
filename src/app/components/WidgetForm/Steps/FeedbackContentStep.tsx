@@ -4,6 +4,7 @@ import { FeedbackType, FeedbackTypes } from "..";
 import { CloseButton } from "../../CloseButton";
 import { Camera } from "lucide-react";
 import { ScreenShotButton } from "./ScreenShotButton";
+import { useState } from "react";
 
 interface FeedBackContentSteps {
   feedbacktype: FeedbackType;
@@ -14,6 +15,7 @@ export function FeedbackContentStep({
   onFeedbackRestartRequested,
 }: FeedBackContentSteps) {
   const feedbackTypeInfo = FeedbackTypes[feedbacktype];
+  const [screenshot, setScreenshot] = useState<string | null>();
   return (
     <>
       <header className="flex flex-col items-center ">
@@ -38,10 +40,10 @@ export function FeedbackContentStep({
         <form className="my-4 w-full">
           <textarea
             className="min-h-[112px] w-full min-w-[304px] resize-none rounded-md border border-zinc-600 bg-transparent text-sm placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 "
-            placeholder="Conte com detalhes oque está acontecendo..." 
+            placeholder="Conte com detalhes oque está acontecendo..."
           ></textarea>
           <footer className="mt-2 flex gap-2">
-            <ScreenShotButton />
+            <ScreenShotButton onScreenShootTook={setScreenshot}  screenshot={screenshot ?? ""}/>
             <button
               className="flex-1  items-center justify-center rounded-md border-transparent bg-brand-500 p-2 text-sm transition-colors hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
               type="submit"
