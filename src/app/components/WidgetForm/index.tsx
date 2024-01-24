@@ -39,11 +39,12 @@ export function WidgetForm() {
   const [feedbackSent, setfeedbackSent] = useState<boolean | null>(false);
   function handleRestartFeedback() {
     setFeedbackType(null);
+    setfeedbackSent(false)
   }
   return (
     <div className="relative mb-4  flex  w-[calc(100vw-2rem)] flex-col items-center  rounded-2xl bg-zinc-900 p-4  shadow-lg md:w-auto">
       {feedbackSent ? (
-        <FeedbackSucessStep />
+        <FeedbackSucessStep onFeedBackRestartRequested={setfeedbackSent}/>
       ) : (
         <>
           {!feedbackType ? (
