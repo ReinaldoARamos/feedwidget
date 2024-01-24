@@ -5,8 +5,8 @@ import { Spinner } from "../../Spinner";
 import { Trash } from "lucide-react";
 
 interface ScreenShootButtonPRops {
-  onScreenShootTook: (screenshot: string) => void;
-  screenshot: string;
+  onScreenShootTook: (screenshot: string | null) => void;
+  screenshot: string | null;
 }
 export function ScreenShotButton({
   onScreenShootTook,
@@ -31,9 +31,10 @@ export function ScreenShotButton({
         className="flex h-10 w-10 items-end justify-end rounded-md border-transparent p-1 text-zinc-400 transition-colors hover:text-zinc-100 "
         style={{
           backgroundImage: `url(${screenshot})`,
-          backgroundPosition: 'right bottom',
-          backgroundSize: 180
+          backgroundPosition: "right bottom",
+          backgroundSize: 180,
         }}
+        onClick={() => onScreenShootTook(null)}
       >
         <Trash className="" />
       </button>
