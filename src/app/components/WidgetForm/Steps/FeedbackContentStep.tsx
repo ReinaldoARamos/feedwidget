@@ -9,10 +9,12 @@ import { FormEvent, useState } from "react";
 interface FeedBackContentSteps {
   feedbacktype: FeedbackType;
   onFeedbackRestartRequested: () => void;
+  onFeedbackSent: () => void;
 }
 export function FeedbackContentStep({
   feedbacktype,
   onFeedbackRestartRequested,
+  onFeedbackSent
 }: FeedBackContentSteps) {
   const feedbackTypeInfo = FeedbackTypes[feedbacktype];
   const [screenshot, setScreenshot] = useState<string | null>();
@@ -21,6 +23,8 @@ export function FeedbackContentStep({
   function handleSubmitFeedback(event: FormEvent){
     event.preventDefault()
 console.log(screenshot, comment)
+
+onFeedbackSent()
   }
   return (
     <>
