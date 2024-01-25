@@ -1,9 +1,9 @@
 import express from "express";
 import { prisma } from "./prisma";
-
+import nodemailer from 'nodemailer'
 export const routes = express.Router();
 
-var transport = NodeFilter.createTransport({
+var transport = nodemailer.createTransport({
   host: "sandbox.smtp.mailtrap.io",
   port: 2525,
   auth: {
