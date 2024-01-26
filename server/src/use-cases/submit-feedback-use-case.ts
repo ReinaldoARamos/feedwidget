@@ -1,3 +1,4 @@
+import { MailAdapter } from "../adapters/mail-adapter";
 import { FeedbacksRepository } from "../repositories/feedbacks-repository";
 import { PrismaFeedbacksRepository } from "../repositories/prisma/prisma-feedbacks-repository";
 
@@ -7,10 +8,10 @@ interface SubmitFeedBackUseCaseRequest {
   screenshot?: string;
 }
 export class SubmitFeedBackUseCase {
-  private feedbacksRepository: PrismaFeedbacksRepository;
-  constructor(feedbacksRepository: FeedbacksRepository) {
-    this.feedbacksRepository = feedbacksRepository;
-  }
+  constructor(
+    private feedbacksRepository: PrismaFeedbacksRepository,
+    private mailAdapter: MailAdapter
+  ) {}
 
   async execute(request: SubmitFeedBackUseCaseRequest) {
     const { comment, type, screenshot } = request;
@@ -19,6 +20,17 @@ export class SubmitFeedBackUseCase {
       type,
       comment,
       screenshot,
+    });
+
+    await this.mailAdapter.sendMail({
+      subject: "Novo FeedBack",
+      body: [
+        `<div style="font-family: sans-serif; font-size: 16px; color: #222">`,
+        `<p>Tipo do feedback:  ${type}</p>`,
+        `<p>Comentário: ${comment}</p>`,
+        `<p>Screenshot: ${screenshot}</p>`,
+        `</div>`,
+      ].join("/n"),
     });
   }
 }
