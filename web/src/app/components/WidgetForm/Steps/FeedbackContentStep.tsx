@@ -5,6 +5,8 @@ import { CloseButton } from "../../CloseButton";
 import { Camera } from "lucide-react";
 import { ScreenShotButton } from "./ScreenShotButton";
 import { FormEvent, useState } from "react";
+import { api } from "@/lib/api";
+import { Spinner } from "../../Spinner";
 
 interface FeedBackContentSteps {
   feedbacktype: FeedbackType;
@@ -14,17 +16,23 @@ interface FeedBackContentSteps {
 export function FeedbackContentStep({
   feedbacktype,
   onFeedbackRestartRequested,
-  onFeedbackSent
+  onFeedbackSent,
 }: FeedBackContentSteps) {
   const feedbackTypeInfo = FeedbackTypes[feedbacktype];
   const [screenshot, setScreenshot] = useState<string | null>();
-  const [comment, setComment] = useState<string | null>('');
+  const [comment, setComment] = useState<string | null>("");
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false)
 
-  function handleSubmitFeedback(event: FormEvent){
-    event.preventDefault()
-console.log(screenshot, comment)
-
-onFeedbackSent()
+  async function handleSubmitFeedback(event: FormEvent) {
+    event.preventDefault();
+    setIsSendingFeedback(true)
+    await api.post("/feedback", {
+      type: feedbacktype,
+      comment,
+      screenshot,
+    });
+    setIsSendingFeedback(false)
+    onFeedbackSent();
   }
   return (
     <>
@@ -51,16 +59,19 @@ onFeedbackSent()
           <textarea
             className="min-h-[112px] w-full min-w-[304px] resize-none rounded-md border border-zinc-600 bg-transparent text-sm placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 "
             placeholder="Conte com detalhes oque está acontecendo..."
-            onChange={event => setComment(event.target.value)}
+            onChange={(event) => setComment(event.target.value)}
           ></textarea>
           <footer className="mt-2 flex gap-2">
-            <ScreenShotButton onScreenShootTook={setScreenshot}  screenshot={screenshot ?? ""}/>
+            <ScreenShotButton
+              onScreenShootTook={setScreenshot}
+              screenshot={screenshot ?? ""}
+            />
             <button
-              className="flex-1 items-center justify-center rounded-md border-transparent bg-brand-500 p-2 text-sm transition-colors hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900 disabled:opacity-50 disabled:hover:brand-500 hover:cursor-not-allowed"
+              className="disabled:hover:brand-500 flex-1 items-center justify-center rounded-md border-transparent bg-brand-500 p-2 text-sm transition-colors hover:cursor-not-allowed hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900 disabled:opacity-50"
               type="submit"
               disabled={comment?.length === 0}
             >
-              Enviar Feedback
+             {isSendingFeedback ? <Spinner /> : <div>Enviar feedback</div>}
             </button>
           </footer>
         </form>
