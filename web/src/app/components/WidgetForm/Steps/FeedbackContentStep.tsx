@@ -71,7 +71,7 @@ export function FeedbackContentStep({
               type="submit"
               disabled={comment?.length === 0}
             >
-             {isSendingFeedback ? <Spinner /> : <div>Enviar feedback</div>}
+             {isSendingFeedback ?<div className="flex item-center justify-center"> <Spinner /> </div>: <div>Enviar feedback</div>}
             </button>
           </footer>
         </form>
