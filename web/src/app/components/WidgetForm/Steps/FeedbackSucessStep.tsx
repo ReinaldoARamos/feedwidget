@@ -1,7 +1,7 @@
 import { CloseButton } from "../../CloseButton";
 
 interface FeedBackSUcessProps{
-    onFeedBackRestartRequested: () => void
+    onFeedBackRestartRequested: (type : boolean) => void
 }
 export function FeedbackSucessStep({onFeedBackRestartRequested} : FeedBackSUcessProps) {
   return (
@@ -30,7 +30,7 @@ export function FeedbackSucessStep({onFeedBackRestartRequested} : FeedBackSUcess
 
         <span className="mt-8 text-xl">Agradecemos o feedback!</span>
         <button 
-        onClick={() => onFeedBackRestartRequested()}
+        onClick={() => onFeedBackRestartRequested}
         type="button"
         className="mt-6 rounded-md border-transparent bg-zinc-800 px-6 py-2 text-sm leading-6 transition-colors hover:bg-zinc-700 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500  ">
           quero enviar outro
