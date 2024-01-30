@@ -5,7 +5,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://localhost:3000'
+  origin: 'http://localhost:3000', // Remova a barra no final
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
 }))
 app.use(routes)
 
