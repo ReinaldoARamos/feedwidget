@@ -69,7 +69,7 @@ export function FeedbackContentStep({
             <button
               className="disabled:hover:brand-500 flex-1 items-center justify-center rounded-md border-transparent bg-brand-500 p-2 text-sm transition-colors hover:cursor-not-allowed hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-zinc-900 disabled:opacity-50"
               type="submit"
-              disabled={comment?.length === 0}
+              disabled={comment?.length === 0 || isSendingFeedback}
             >
              {isSendingFeedback ?<div className="flex item-center justify-center"> <Spinner /> </div>: <div>Enviar feedback</div>}
             </button>
