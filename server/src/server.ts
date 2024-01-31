@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000', // Remova a barra no final
+  origin: 'https://feedwidget-one.vercel.app', // Remova a barra no final
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }))
